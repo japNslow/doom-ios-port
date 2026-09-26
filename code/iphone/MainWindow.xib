@@ -3556,7 +3556,7 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<string key="IBUIText">PLAY GAME</string>
 							<object class="NSFont" key="IBUIFont" id="333991173">
-								<string key="NSName">idGinzaNarrow-Medium2</string>
+								<string key="NSName">Courier</string>
 								<double key="NSSize">19</double>
 								<int key="NSfFlags">16</int>
 							</object>
@@ -3735,7 +3735,7 @@
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<string key="IBUIText">NEW GAME</string>
 									<object class="NSFont" key="IBUIFont" id="430899533">
-										<string key="NSName">idGinzaNarrow-Medium2</string>
+										<string key="NSName">Courier</string>
 										<double key="NSSize">17</double>
 										<int key="NSfFlags">16</int>
 									</object>

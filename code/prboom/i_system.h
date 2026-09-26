@@ -74,4 +74,8 @@ int I_Filelength(int handle);
 
 void I_SetAffinityMask(void);
 
+#ifdef IPHONE
+void SysIPhoneVibrate(void);
+#endif
+
 #endif

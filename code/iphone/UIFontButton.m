@@ -20,7 +20,7 @@
 - (void)awakeFromNib {
     CGFloat points = self.titleLabel.font.pointSize;
     
-    self.titleLabel.font = [UIFont fontWithName:@"idGinza Narrow" size:points];
+    self.titleLabel.font = [UIFont fontWithName:@"Courier" size:points];
     
     if( self.label2 )
         label2Color = self.label2.textColor;

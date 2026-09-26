@@ -40,6 +40,7 @@
 #include "sounds.h"
 #include "d_deh.h"  // Ty 03/22/98 - externalized strings
 #include "p_tick.h"
+#include "i_system.h"
 #include "lprintf.h"
 
 #include "p_inter.h"

@@ -151,8 +151,6 @@
 		C879309413F5D8AA003D834F /* Episode3Background.png in Resources */ = {isa = PBXBuildFile; fileRef = C879308A13F5D8AA003D834F /* Episode3Background.png */; };
 		C879309513F5D8AA003D834F /* Episode4Background.png in Resources */ = {isa = PBXBuildFile; fileRef = C879308B13F5D8AA003D834F /* Episode4Background.png */; };
 		C879309613F5D8AA003D834F /* MissonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C879308C13F5D8AA003D834F /* MissonBackground.png */; };
-		C879309713F5D8AA003D834F /* UpArrow_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = C879308D13F5D8AA003D834F /* UpArrow_Highlighted.png */; };
-		C879309813F5D8AA003D834F /* UpArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C879308E13F5D8AA003D834F /* UpArrow.png */; };
 		C87930E513F5EC1B003D834F /* Episode1Background_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = C87930E113F5EC1B003D834F /* Episode1Background_Highlighted.png */; };
 		C87930E613F5EC1B003D834F /* Episode2Background_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = C87930E213F5EC1B003D834F /* Episode2Background_Highlighted.png */; };
 		C87930E713F5EC1B003D834F /* Episode3Background_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = C87930E313F5EC1B003D834F /* Episode3Background_Highlighted.png */; };
@@ -445,8 +443,6 @@
 		C879308A13F5D8AA003D834F /* Episode3Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Episode3Background.png; path = "../../IB Images/Episode3Background.png"; sourceTree = SOURCE_ROOT; };
 		C879308B13F5D8AA003D834F /* Episode4Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Episode4Background.png; path = "../../IB Images/Episode4Background.png"; sourceTree = SOURCE_ROOT; };
 		C879308C13F5D8AA003D834F /* MissonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MissonBackground.png; path = "../../IB Images/MissonBackground.png"; sourceTree = SOURCE_ROOT; };
-		C879308D13F5D8AA003D834F /* UpArrow_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UpArrow_Highlighted.png; path = "../../IB Images/UpArrow_Highlighted.png"; sourceTree = SOURCE_ROOT; };
-		C879308E13F5D8AA003D834F /* UpArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UpArrow.png; path = "../../IB Images/UpArrow.png"; sourceTree = SOURCE_ROOT; };
 		C87930E113F5EC1B003D834F /* Episode1Background_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Episode1Background_Highlighted.png; path = "../../IB Images/Episode1Background_Highlighted.png"; sourceTree = SOURCE_ROOT; };
 		C87930E213F5EC1B003D834F /* Episode2Background_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Episode2Background_Highlighted.png; path = "../../IB Images/Episode2Background_Highlighted.png"; sourceTree = SOURCE_ROOT; };
 		C87930E313F5EC1B003D834F /* Episode3Background_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Episode3Background_Highlighted.png; path = "../../IB Images/Episode3Background_Highlighted.png"; sourceTree = SOURCE_ROOT; };
@@ -814,8 +810,6 @@
 				C879308A13F5D8AA003D834F /* Episode3Background.png */,
 				C879308B13F5D8AA003D834F /* Episode4Background.png */,
 				C879308C13F5D8AA003D834F /* MissonBackground.png */,
-				C879308D13F5D8AA003D834F /* UpArrow_Highlighted.png */,
-				C879308E13F5D8AA003D834F /* UpArrow.png */,
 				C8792ED113F5AFE5003D834F /* BackButton_Highlighted.png */,
 				C8792ED213F5AFE5003D834F /* Button_Highlighted.png */,
 				C8792ED313F5AFE5003D834F /* NextButton_Highlighted.png */,
@@ -956,8 +950,6 @@
 				C879309413F5D8AA003D834F /* Episode3Background.png in Resources */,
 				C879309513F5D8AA003D834F /* Episode4Background.png in Resources */,
 				C879309613F5D8AA003D834F /* MissonBackground.png in Resources */,
-				C879309713F5D8AA003D834F /* UpArrow_Highlighted.png in Resources */,
-				C879309813F5D8AA003D834F /* UpArrow.png in Resources */,
 				C87930E513F5EC1B003D834F /* Episode1Background_Highlighted.png in Resources */,
 				C87930E613F5EC1B003D834F /* Episode2Background_Highlighted.png in Resources */,
 				C87930E713F5EC1B003D834F /* Episode3Background_Highlighted.png in Resources */,

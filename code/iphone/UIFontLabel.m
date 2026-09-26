@@ -18,7 +18,7 @@
 - (void)awakeFromNib {
     CGFloat points = self.font.pointSize;
     
-    self.font = [UIFont fontWithName:@"idGinza Narrow" size:points];
+    self.font = [UIFont fontWithName:@"Courier" size:points];
 }
 
 @end

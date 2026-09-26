@@ -3515,7 +3515,7 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<string key="IBUIText">MORE GAMES</string>
 									<object class="NSFont" key="IBUIFont" id="99776048">
-										<string key="NSName">idGinzaNarrow-Medium2</string>
+										<string key="NSName">Courier</string>
 										<double key="NSSize">34</double>
 										<int key="NSfFlags">16</int>
 									</object>
@@ -4084,7 +4084,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<string key="IBUIText">EXTRAS</string>
 							<object class="NSFont" key="IBUIFont" id="353514369">
-								<string key="NSName">idGinzaNarrow-Medium2</string>
+								<string key="NSName">Courier</string>
 								<double key="NSSize">36</double>
 								<int key="NSfFlags">16</int>
 							</object>
