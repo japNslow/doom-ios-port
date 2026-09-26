@@ -42,7 +42,7 @@ void PK_Init( const char *pakFileName ) {
 	
 	int fd = open( pakFileName, O_RDONLY );
 	if ( fd == -1 ) {
-		printf( "Couldn't open file\n" );
+		printf( "Couldn't open file: %s (errno %d: %s)\n", pakFileName, errno, strerror( errno ) );
 		assert( 0 );
 	}
 
@@ -55,7 +55,7 @@ void PK_Init( const char *pakFileName ) {
 	// mmap keeps the file internally, we can close our descriptor
 	close( fd );
 	
-	if ( (int)pkHeader == -1 ) {
+	if ( pkHeader == MAP_FAILED ) {
 		printf( "mmap failed: %s\n", strerror( errno ) );
 		assert( 0 );
 	}

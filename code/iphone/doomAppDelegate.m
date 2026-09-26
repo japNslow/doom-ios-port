@@ -118,20 +118,12 @@ void *GameThread( void *args ) {
 							encoding: NSASCIIStringEncoding ];
 	
 	// get the app directory, where our data files live
-	// this gives something like:
-	// /var/mobile/Applications/71355F9F-6400-4267-B07D-E7980764F5A8/Applications
-	// when what we want is:
-	// /var/mobile/Applications/71355F9F-6400-4267-B07D-E7980764F5A8/doom.app
-	// so we get that in main() from argv[0]
-#if 0	
-	paths = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES);
-	NSString *appDirectory = [paths objectAtIndex:0];
-
-	static char iphoneAppDirectoryFromAPI[1024];
-	[appDirectory getCString: iphoneAppDirectoryFromAPI 
-							maxLength: sizeof( iphoneAppDirectoryFromAPI ) - 1
-							encoding: NSASCIIStringEncoding ];
-#endif
+	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+	if (bundlePath && [bundlePath length] > 0) {
+		[bundlePath getCString: iphoneAppDirectory 
+					 maxLength: sizeof( iphoneAppDirectory ) - 1
+					  encoding: NSUTF8StringEncoding ];
+	}
 	
 	// disable screen dimming
 	[UIApplication sharedApplication].idleTimerDisabled = YES;
