@@ -10,8 +10,16 @@
 
                    
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Tells Interface Builder to go to the Main Menu.
 void IB_GotoMainMenu();
+
+#ifdef __cplusplus
+}
+#endif
 
 
 

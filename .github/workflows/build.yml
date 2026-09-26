@@ -37,7 +37,6 @@ jobs:
 
       - name: Build with xcodebuild
         id: xcodebuild
-        continue-on-error: true
         run: |
           set -o pipefail
           echo "=== Starting xcodebuild ===" > build.log
@@ -65,8 +64,8 @@ jobs:
         run: |
           set -e
           APP_PATH=$(find code/iphone/build /Users/runner/Library/Developer/Xcode/DerivedData -name "Doom.app" -type d 2>/dev/null | head -n 1)
-          if [ -z "$APP_PATH" ]; then
-            echo "Doom.app not found!"
+          if [ -z "$APP_PATH" ] || [ ! -f "$APP_PATH/Doom" ]; then
+            echo "Doom binary not found in $APP_PATH!"
             exit 1
           fi
           echo "Found Doom.app at: $APP_PATH"

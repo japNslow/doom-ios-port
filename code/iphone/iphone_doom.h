@@ -18,6 +18,10 @@
  
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // this is the version number displayed on the menu screen
 #define DOOM_IPHONE_VERSION 0.9
 
@@ -558,4 +562,8 @@ void iphoneFrame();
 void iphoneAsyncTic();
 void iphoneTiltEvent( float *tilts );
 void Sys_Log(const char *fmt, ...);
+
+#ifdef __cplusplus
+}
+#endif
 

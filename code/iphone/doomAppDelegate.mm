@@ -23,6 +23,7 @@
 #import <AudioToolbox/AudioServices.h>
 #include <exception>
 #include <typeinfo>
+#include "iphone_doom.h"
 #include "../doomiphone.h"
 #import <QuartzCore/CADisplayLink.h>
 #import "SettingsMenuView.h"
