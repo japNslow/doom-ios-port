@@ -49,6 +49,10 @@
 #include "d_deh.h"    // Ty 03/27/98 - externalizations
 #include "lprintf.h"  // jff 08/03/98 - declaration of lprintf
 #include "g_game.h"
+#ifdef IPHONE
+#include "SDL_opengl.h"
+#include "i_system.h"
+#endif
 
 //jff 1/7/98 default automap colors added
 int mapcolor_back;    // map background
