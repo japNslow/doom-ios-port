@@ -483,6 +483,7 @@ boolean ResolveNetworkServer( struct sockaddr *addr );
 // someone else grabbed it just before we could.
 boolean RegisterGameService();
 void TerminateGameService();
+void SetupEmptyNetGame();
 
 // called by AsyncTic() to check for server state changes,
 // registers for service browsing on first call.
