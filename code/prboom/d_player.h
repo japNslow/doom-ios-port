@@ -201,7 +201,7 @@ typedef struct
 
 } wbplayerstruct_t;
 
-typedef struct
+typedef struct wbstartstruct_s
 {
   int         epsd;   // episode # (0-2)
 
