@@ -1,0 +1,62 @@
+name: Build Doom iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Determine scheme
+        id: scheme
+        run: |
+          echo "=== Listing Xcode project configuration ==="
+          xcodebuild -list -project code/iphone/Doom.xcodeproj
+          
+          # Extract first scheme from xcodebuild -list if present
+          SCHEME=$(xcodebuild -list -project code/iphone/Doom.xcodeproj | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed '/^$/d' | head -n 1)
+          
+          # If no scheme is found, fallback to first target
+          if [ -z "$SCHEME" ]; then
+            TARGET=$(xcodebuild -list -project code/iphone/Doom.xcodeproj | awk '/Targets:/{flag=1;next}/^$/{flag=0}flag' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | sed '/^$/d' | head -n 1)
+            SCHEME="${TARGET:-Doom}"
+          fi
+          
+          echo "Selected scheme/target: $SCHEME"
+          echo "scheme=$SCHEME" >> "$GITHUB_ENV"
+
+      - name: Build with xcodebuild
+        id: xcodebuild
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          echo "=== Starting xcodebuild ===" > build.log
+          xcodebuild build \
+            -project code/iphone/Doom.xcodeproj \
+            -scheme "${{ env.scheme }}" \
+            -destination "generic/platform=iOS" \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee -a build.log || \
+          xcodebuild build \
+            -project code/iphone/Doom.xcodeproj \
+            -target "${{ env.scheme }}" \
+            -destination "generic/platform=iOS" \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee -a build.log
+
+      - name: Upload build log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-log
+          path: build.log
