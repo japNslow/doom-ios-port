@@ -45,6 +45,7 @@
 //#include <SDL.h>
 #include "SDL_opengl.h"
 #include "doomtype.h"
+#include "i_system.h"
 #include "w_wad.h"
 #include "m_argv.h"
 #include "d_event.h"
