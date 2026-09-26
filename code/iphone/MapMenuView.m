@@ -12,6 +12,7 @@
 
 #import "MapMenuView.h"
 #import "doomAppDelegate.h"
+#include "doomiphone.h"
 
 @implementation MapMenuView
 
