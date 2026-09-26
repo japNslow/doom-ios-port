@@ -118,7 +118,6 @@
 		C8139AB513FADA9D0094C2C0 /* SliderSkull~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C8139AB413FADA9D0094C2C0 /* SliderSkull~ipad.png */; };
 		C81E0C7213DF471000B1049A /* UIFontButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C81E0C7113DF471000B1049A /* UIFontButton.m */; };
 		C81E0C8F13DF4A1B00B1049A /* UIFontLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C81E0C8E13DF4A1B00B1049A /* UIFontLabel.m */; };
-		C81E0E5E13E076E400B1049A /* idGinzaNar-Md2.otf in Resources */ = {isa = PBXBuildFile; fileRef = C81E0E5D13E076E400B1049A /* idGinzaNar-Md2.otf */; };
 		C81E104C13E1CCA000B1049A /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C81E104013E1CCA000B1049A /* BackButton.png */; };
 		C81E104D13E1CCA000B1049A /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = C81E104113E1CCA000B1049A /* Button.png */; };
 		C81E104E13E1CCA000B1049A /* DOOM_sigil_decal.png in Resources */ = {isa = PBXBuildFile; fileRef = C81E104213E1CCA000B1049A /* DOOM_sigil_decal.png */; };
@@ -407,7 +406,6 @@
 		C81E0C7113DF471000B1049A /* UIFontButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFontButton.m; sourceTree = "<group>"; };
 		C81E0C8D13DF4A1B00B1049A /* UIFontLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFontLabel.h; sourceTree = "<group>"; };
 		C81E0C8E13DF4A1B00B1049A /* UIFontLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFontLabel.m; sourceTree = "<group>"; };
-		C81E0E5D13E076E400B1049A /* idGinzaNar-Md2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "idGinzaNar-Md2.otf"; path = "../../idGinzaNar-Md2.otf"; sourceTree = SOURCE_ROOT; };
 		C81E104013E1CCA000B1049A /* BackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackButton.png; path = "../../IB Images/BackButton.png"; sourceTree = SOURCE_ROOT; };
 		C81E104113E1CCA000B1049A /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = "../../IB Images/Button.png"; sourceTree = SOURCE_ROOT; };
 		C81E104213E1CCA000B1049A /* DOOM_sigil_decal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DOOM_sigil_decal.png; path = "../../IB Images/DOOM_sigil_decal.png"; sourceTree = SOURCE_ROOT; };
@@ -837,7 +835,6 @@
 				C81E104913E1CCA000B1049A /* Nightmare.png */,
 				C81E104A13E1CCA000B1049A /* ResumeButton.png */,
 				C81E104B13E1CCA000B1049A /* SelectedBracket.png */,
-				C81E0E5D13E076E400B1049A /* idGinzaNar-Md2.otf */,
 			);
 			name = "Interface Builder Images";
 			sourceTree = "<group>";
@@ -930,7 +927,6 @@
 				C8D1CF6C13DE1F0600F0EAC6 /* DOOM_72.png in Resources */,
 				C8D1CF8613DF792D00F0EAC6 /* Default@2x.png in Resources */,
 				C8D1CF8813DF79BC00F0EAC6 /* Default~ipad.png in Resources */,
-				C81E0E5E13E076E400B1049A /* idGinzaNar-Md2.otf in Resources */,
 				C81E104C13E1CCA000B1049A /* BackButton.png in Resources */,
 				C81E104D13E1CCA000B1049A /* Button.png in Resources */,
 				C81E104E13E1CCA000B1049A /* DOOM_sigil_decal.png in Resources */,
