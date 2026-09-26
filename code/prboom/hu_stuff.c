@@ -44,6 +44,10 @@
 #include "d_deh.h"   /* Ty 03/27/98 - externalization of mapnamesx arrays */
 #include "g_game.h"
 #include "r_main.h"
+#include "i_system.h"
+#ifdef IPHONE
+#include "iphone_doom.h"
+#endif
 
 // global heads up display controls
 

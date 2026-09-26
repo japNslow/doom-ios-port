@@ -76,6 +76,7 @@ void I_SetAffinityMask(void);
 
 #ifdef IPHONE
 void SysIPhoneVibrate(void);
+void iphoneSetNotifyText(const char *str, ...);
 #endif
 
 #endif
