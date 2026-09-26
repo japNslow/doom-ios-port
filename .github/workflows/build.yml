@@ -61,12 +61,36 @@ jobs:
           name: build-log
           path: build.log
 
-      - name: Upload app artifact
+      - name: Package .ipa and pseudo-sign with ldid
+        run: |
+          set -e
+          APP_PATH=$(find code/iphone/build /Users/runner/Library/Developer/Xcode/DerivedData -name "Doom.app" -type d 2>/dev/null | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Doom.app not found!"
+            exit 1
+          fi
+          echo "Found Doom.app at: $APP_PATH"
+
+          mkdir -p ipa_build/Payload
+          cp -R "$APP_PATH" ipa_build/Payload/
+
+          echo "Installing ldid..."
+          brew install ldid
+
+          echo "Signing with ldid..."
+          ldid -S ipa_build/Payload/Doom.app/Doom
+
+          cd ipa_build
+          zip -qr ../Doom.ipa Payload
+          cd ..
+
+          echo "Doom.ipa created successfully:"
+          ls -lh Doom.ipa
+
+      - name: Upload ipa artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: Doom-app
-          path: |
-            code/iphone/build/*-iphoneos/*.app
-            /Users/runner/Library/Developer/Xcode/DerivedData/**/Build/Products/*-iphoneos/*.app
+          name: Doom-ipa
+          path: Doom.ipa
           if-no-files-found: ignore
