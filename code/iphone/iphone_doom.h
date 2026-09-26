@@ -22,6 +22,8 @@
 extern "C" {
 #endif
 
+#include "doomiphone.h"
+
 // this is the version number displayed on the menu screen
 #define DOOM_IPHONE_VERSION 0.9
 
