@@ -125,13 +125,6 @@
 		C879320113F6143C003D834F /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C879320013F6143C003D834F /* UICustomSwitch.m */; };
 		C88530C913D8CBEA00A5FBF7 /* MainMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C88530C813D8CBEA00A5FBF7 /* MainMenuView.m */; };
 		C885314413D8D79400A5FBF7 /* ControlsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C885314213D8D79400A5FBF7 /* ControlsMenuView.m */; };
-		C8D1CF6813DE1EB600F0EAC6 /* DOOM_57.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CF6713DE1EB600F0EAC6 /* DOOM_57.png */; };
-		C8D1CF6A13DE1EF500F0EAC6 /* DOOM_114.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CF6913DE1EF500F0EAC6 /* DOOM_114.png */; };
-		C8D1CF6C13DE1F0600F0EAC6 /* DOOM_72.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CF6B13DE1F0600F0EAC6 /* DOOM_72.png */; };
-		C8D1CF8613DF792D00F0EAC6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CF8513DF792D00F0EAC6 /* Default@2x.png */; };
-		C8D1CF8813DF79BC00F0EAC6 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CF8713DF79BC00F0EAC6 /* Default~ipad.png */; };
-		C8D1CFA813E1CDBD00F0EAC6 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CFA713E1CDBD00F0EAC6 /* Default-Portrait~ipad.png */; };
-		C8D1CFAA13E1CDC600F0EAC6 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D1CFA913E1CDC600F0EAC6 /* Default-Landscape~ipad.png */; };
 		ED9AB3D110966E85000B5852 /* iphone_email.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9AB3D010966E85000B5852 /* iphone_email.m */; };
 		EDD2760511C2B19E004A9B9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD2760411C2B19E004A9B9B /* CoreGraphics.framework */; };
 		EDD2760711C2B19E004A9B9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD2760611C2B19E004A9B9B /* Foundation.framework */; };
@@ -372,13 +365,6 @@
 		C88530C813D8CBEA00A5FBF7 /* MainMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuView.m; sourceTree = "<group>"; };
 		C885314213D8D79400A5FBF7 /* ControlsMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsMenuView.m; sourceTree = "<group>"; };
 		C885314313D8D79400A5FBF7 /* ControlsMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsMenuView.h; sourceTree = "<group>"; };
-		C8D1CF6713DE1EB600F0EAC6 /* DOOM_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DOOM_57.png; sourceTree = "<group>"; };
-		C8D1CF6913DE1EF500F0EAC6 /* DOOM_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DOOM_114.png; sourceTree = "<group>"; };
-		C8D1CF6B13DE1F0600F0EAC6 /* DOOM_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DOOM_72.png; sourceTree = "<group>"; };
-		C8D1CF8513DF792D00F0EAC6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		C8D1CF8713DF79BC00F0EAC6 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = "<group>"; };
-		C8D1CFA713E1CDBD00F0EAC6 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		C8D1CFA913E1CDC600F0EAC6 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		ED9AB3CF10966E85000B5852 /* iphone_email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iphone_email.h; sourceTree = "<group>"; };
 		ED9AB3D010966E85000B5852 /* iphone_email.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iphone_email.m; sourceTree = "<group>"; };
 		EDD2760411C2B19E004A9B9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -417,13 +403,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				C8D1CFA913E1CDC600F0EAC6 /* Default-Landscape~ipad.png */,
-				C8D1CFA713E1CDBD00F0EAC6 /* Default-Portrait~ipad.png */,
-				C8D1CF8713DF79BC00F0EAC6 /* Default~ipad.png */,
-				C8D1CF8513DF792D00F0EAC6 /* Default@2x.png */,
-				C8D1CF6B13DE1F0600F0EAC6 /* DOOM_72.png */,
-				C8D1CF6913DE1EF500F0EAC6 /* DOOM_114.png */,
-				C8D1CF6713DE1EB600F0EAC6 /* DOOM_57.png */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -767,13 +746,6 @@
 				43CF02FF0F56974E00E4A23D /* Default.png in Resources */,
 				4364BF3F0F5CB25900F29317 /* dist.plist in Resources */,
 				C861F27213BD2DC600DB34A8 /* MainWindow-iPad.xib in Resources */,
-				C8D1CF6813DE1EB600F0EAC6 /* DOOM_57.png in Resources */,
-				C8D1CF6A13DE1EF500F0EAC6 /* DOOM_114.png in Resources */,
-				C8D1CF6C13DE1F0600F0EAC6 /* DOOM_72.png in Resources */,
-				C8D1CF8613DF792D00F0EAC6 /* Default@2x.png in Resources */,
-				C8D1CF8813DF79BC00F0EAC6 /* Default~ipad.png in Resources */,
-				C8D1CFA813E1CDBD00F0EAC6 /* Default-Portrait~ipad.png in Resources */,
-				C8D1CFAA13E1CDC600F0EAC6 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

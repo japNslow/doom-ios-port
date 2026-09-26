@@ -45,9 +45,6 @@
 #include "g_game.h"
 #include "r_main.h"
 #include "i_system.h"
-#ifdef IPHONE
-#include "iphone_doom.h"
-#endif
 
 // global heads up display controls
 
