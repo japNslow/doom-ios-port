@@ -42,6 +42,25 @@
 char iphoneDocDirectory[1024];
 char iphoneAppDirectory[1024];
 
+void Sys_Log(const char *fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    NSString *formatStr = [[NSString alloc] initWithCString:fmt encoding:NSUTF8StringEncoding];
+    if (!formatStr) {
+        formatStr = [[NSString alloc] initWithCString:fmt encoding:NSASCIIStringEncoding];
+    }
+    if (formatStr) {
+        NSString *msg = [[NSString alloc] initWithFormat:formatStr arguments:ap];
+        NSLog(@"%@", msg);
+        [msg release];
+        [formatStr release];
+    } else {
+        vprintf(fmt, ap);
+        printf("\n");
+    }
+    va_end(ap);
+}
+
 
 @implementation gameAppDelegate
 
@@ -163,7 +182,11 @@ void *GameThread( void *args ) {
 	printf( "new event thread priority: %f\n", (float)[NSThread threadPriority] );
 	
     // do all the game startup work
-	iphoneStartup();
+    @try {
+        iphoneStartup();
+    } @catch (NSException *e) {
+        NSLog(@"[Doom CRITICAL Exception] in iphoneStartup: %@ - reason: %@", e.name, e.reason);
+    }
     
     int animationFrameInterval = 2;
     CADisplayLink *aDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(runFrame)];

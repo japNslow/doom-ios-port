@@ -38,43 +38,67 @@ void PK_LoadTexture( pkTexture_t *image );
  ==================
  */
 void PK_Init( const char *pakFileName ) {
+	Sys_Log( "[PK_Init] открываю pack-файл ресурсов: %s", pakFileName );
 	printf( "PK_Init( %s )\n", pakFileName );
 	
 	int fd = open( pakFileName, O_RDONLY );
 	if ( fd == -1 ) {
+		Sys_Log( "[PK_Init ОШИБКА] Не удалось открыть файл: %s (errno %d: %s)", pakFileName, errno, strerror( errno ) );
 		printf( "Couldn't open file: %s (errno %d: %s)\n", pakFileName, errno, strerror( errno ) );
-		assert( 0 );
+		return;
 	}
 
 	struct stat s;
-	fstat( fd, &s );
+	if ( fstat( fd, &s ) != 0 ) {
+		Sys_Log( "[PK_Init ОШИБКА] fstat не удался для %s (errno %d: %s)", pakFileName, errno, strerror( errno ) );
+		close( fd );
+		return;
+	}
 		
 	pkSize = s.st_size;
+	Sys_Log( "[PK_Init] Читаю размер и заголовок: размер файла %d байт (%.2f МБ)", pkSize, (float)pkSize / (1024.0f * 1024.0f) );
+
 	pkHeader = mmap( NULL, pkSize, PROT_READ, MAP_FILE|MAP_PRIVATE, fd, 0 );
 	
 	// mmap keeps the file internally, we can close our descriptor
 	close( fd );
 	
 	if ( pkHeader == MAP_FAILED ) {
+		Sys_Log( "[PK_Init ОШИБКА] mmap не удался: %s", strerror( errno ) );
 		printf( "mmap failed: %s\n", strerror( errno ) );
-		assert( 0 );
+		return;
 	}
 	
+	Sys_Log( "[PK_Init] Заголовок прочитан: версия 0x%08x (ожидалась 0x%08x)", pkHeader->version, PKFILE_VERSION );
 	if ( pkHeader->version != PKFILE_VERSION ) {
+		Sys_Log( "[PK_Init ОШИБКА] Неверная версия pack-файла: 0x%x != 0x%x", pkHeader->version, PKFILE_VERSION );
 		printf( "bad pak file version: 0x%x != 0x%x\n", pkHeader->version, PKFILE_VERSION );
-		assert( 0 );
+		return;
 	}
 	
+	Sys_Log( "[PK_Init] Читаю директорию: textures.count = %d, wavs.count = %d, raws.count = %d",
+		pkHeader->textures.count, pkHeader->wavs.count, pkHeader->raws.count );
+
 	// build the local image table
+	Sys_Log( "[PK_Init] Выделяю память под таблицу текстур: %lu байт", (unsigned long)(sizeof( pkTextures[0] ) * pkHeader->textures.count) );
 	pkTextures = malloc( sizeof( pkTextures[0] ) * pkHeader->textures.count );
+	if ( !pkTextures && pkHeader->textures.count > 0 ) {
+		Sys_Log( "[PK_Init ОШИБКА] Не удалось выделить память под pkTextures!" );
+		return;
+	}
 	memset( pkTextures, 0, sizeof( pkTextures[0] ) * pkHeader->textures.count );
 	for ( int i = 0 ; i < pkHeader->textures.count ; i++ ) {
 		pkTextures[i].textureData = (pkTextureData_t *)( (byte *)pkHeader + pkHeader->textures.tableOfs + i * pkHeader->textures.structSize );
 	}
 	
 	// build the local wav table
+	Sys_Log( "[PK_Init] Выделяю память под таблицу аудио: %lu байт", (unsigned long)(sizeof( pkWavs[0] ) * pkHeader->wavs.count) );
 	int	startLoadingWavs = SysIphoneMicroseconds();
 	pkWavs = malloc( sizeof( pkWavs[0] ) * pkHeader->wavs.count );
+	if ( !pkWavs && pkHeader->wavs.count > 0 ) {
+		Sys_Log( "[PK_Init ОШИБКА] Не удалось выделить память под pkWavs!" );
+		return;
+	}
 	memset( pkWavs, 0, sizeof( pkWavs[0] ) * pkHeader->wavs.count );
 	for ( int i = 0 ; i < pkHeader->wavs.count ; i++ ) {
 		pkWav_t *sfx = &pkWavs[i];
@@ -101,8 +125,11 @@ void PK_Init( const char *pakFileName ) {
 					 , sfx->wavData->wavRate );		
 	}
 	int	endLoadingWavs = SysIphoneMicroseconds();
+	Sys_Log( "[PK_Init] Загрузка wavs в OpenAL завершена за %d мкс", endLoadingWavs - startLoadingWavs );
 	printf( "%i usec to load wavs\n", endLoadingWavs - startLoadingWavs );
 	
+	Sys_Log( "[PK_Init] Mapped %d байт %s по адресу %p: %d textures, %d wavs, %d raws. Успешно!",
+		pkSize, pakFileName, pkHeader, pkHeader->textures.count, pkHeader->wavs.count, pkHeader->raws.count );
 	printf( "Mapped %i bytes of %s at 0x%p\n", pkSize, pakFileName, pkHeader );
 	printf( "%4i textures\n", pkHeader->textures.count );
 	printf( "%4i wavs\n", pkHeader->wavs.count );

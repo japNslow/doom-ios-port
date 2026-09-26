@@ -387,7 +387,14 @@ OSStatus BackgroundTrackMgr::SetupBuffers(BG_FileInfo *inFileInfo) {
 	}
 	
 	if (isFormatVBR) {
-		mPacketDescs = new AudioStreamPacketDescription [mNumPacketsToRead];
+		if (mNumPacketsToRead > 65536) {
+			mNumPacketsToRead = 65536;
+		}
+		mPacketDescs = new (std::nothrow) AudioStreamPacketDescription [mNumPacketsToRead];
+		if (!mPacketDescs) {
+			result = kSoundEngineErrUnitialized;
+			goto end;
+		}
 	} else {
 		mPacketDescs = NULL; // we don't provide packet descriptions for constant bit rate formats (like linear PCM)	
 	}
@@ -419,7 +426,11 @@ OSStatus BackgroundTrackMgr::LoadTrack(const char* inFilePath, Boolean inAddToQu
 		result = 0;
 	AssertNoError("Error opening URL", fail);
 	
-	CurFileInfo = new BG_FileInfo;
+	CurFileInfo = new (std::nothrow) BG_FileInfo;
+	if (CurFileInfo == NULL) {
+		result = kSoundEngineErrUnitialized;
+		goto fail;
+	}
 	CurFileInfo->mFilePath = inFilePath;
 	
 	result = AudioFileOpenURL(theURL, kAudioFileReadPermission, 0, &CurFileInfo->mAFID);
@@ -455,6 +466,7 @@ fail:
 
 OSStatus BackgroundTrackMgr::SetVolume(Float32 inVolume) {
 	mVolume = inVolume;
+	if (!mQueue) return noErr;
 	return AudioQueueSetParameter(mQueue, kAudioQueueParam_Volume, mVolume * gMasterVolumeGain);
 }
 
@@ -463,6 +475,9 @@ Float32 BackgroundTrackMgr::GetVolume() const {
 }
 
 OSStatus BackgroundTrackMgr::Start() {
+	if (!mQueue) {
+		return noErr;
+	}
 	OSStatus result = AudioQueuePrime(mQueue, 1, NULL);	
 	if (result)	{
 		printf("BackgroundTrackMgr: Error priming queue: %d\n", (int)result);
@@ -476,6 +491,7 @@ OSStatus BackgroundTrackMgr::Stop(Boolean inStopAtEnd) {
 		mStopAtEnd = true;
 		return noErr;
 	} else {
+		if (!mQueue) return noErr;
 		return AudioQueueStop(mQueue, true);
 	}
 }
@@ -491,39 +507,56 @@ void iphonePauseMusic() {
             // music is disabled
             return;
         }
-        AudioQueuePause(sBackgroundTrackMgr.mQueue);
+        if (sBackgroundTrackMgr.mQueue) {
+            AudioQueuePause(sBackgroundTrackMgr.mQueue);
+        }
     }
 }
 void iphoneResumeMusic() {
-	if ( music->value == 0 ) {
+	if ( music && music->value == 0 ) {
 		// music is disabled
 		return;
 	}
-	AudioQueueStart(sBackgroundTrackMgr.mQueue,NULL);
+	if (sBackgroundTrackMgr.mQueue) {
+		AudioQueueStart(sBackgroundTrackMgr.mQueue,NULL);
+	}
 }
 void iphoneStopMusic() {
 	sBackgroundTrackMgr.Teardown();
 }
 
 void iphoneStartMusic() {
-	if ( music->value == 0 ) {
+	if ( music && music->value == 0 ) {
 		// music is disabled
 		return;
 	}
 	char	fullName[1024];
 	sprintf( fullName, "%s/base/music/d_%s.mp3", SysIphoneGetAppDir(), currentMusicName );
 	
+	if ( access( fullName, F_OK ) != 0 ) {
+		printf( "Music file '%s' not found, skipping music.\n", fullName );
+		return;
+	}
+
 	printf( "Starting music '%s'\n", fullName );
 
-	iphoneStopMusic();
-	sBackgroundTrackMgr.LoadTrack( fullName, false, true);
-	sBackgroundTrackMgr.Start();
-	
-	if ( !strcmp( currentMusicName, "intro" ) ) {
-		// stop the intro music at end, don't loop
-		sBackgroundTrackMgr.mStopAtEnd = true;
-	} else {
-		sBackgroundTrackMgr.mStopAtEnd = false;
+	try {
+		iphoneStopMusic();
+		OSStatus res = sBackgroundTrackMgr.LoadTrack( fullName, false, true);
+		if ( res == noErr ) {
+			sBackgroundTrackMgr.Start();
+			
+			if ( !strcmp( currentMusicName, "intro" ) ) {
+				// stop the intro music at end, don't loop
+				sBackgroundTrackMgr.mStopAtEnd = true;
+			} else {
+				sBackgroundTrackMgr.mStopAtEnd = false;
+			}
+		}
+	} catch ( const std::exception &e ) {
+		printf( "Exception in iphoneStartMusic: %s\n", e.what() );
+	} catch ( ... ) {
+		printf( "Unknown exception in iphoneStartMusic\n" );
 	}
 }
 

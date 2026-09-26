@@ -557,4 +557,5 @@ void iphoneShutdown();
 void iphoneFrame();
 void iphoneAsyncTic();
 void iphoneTiltEvent( float *tilts );
+void Sys_Log(const char *fmt, ...);
 

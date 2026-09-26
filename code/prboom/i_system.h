@@ -85,6 +85,7 @@ void iphoneIntermission(struct wbstartstruct_s *wbstartstruct);
 void iphoneStartLevel(void);
 void iphoneSet2D(void);
 int iphoneRotateForLandscape(void);
+void Sys_Log(const char *fmt, ...);
 #endif
 
 #endif

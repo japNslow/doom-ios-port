@@ -156,6 +156,7 @@ static void W_AddFile(wadfile_info_t *wadfile)
 
   //jff 8/3/98 use logical output routine
   lprintf (LO_INFO," adding %s\n",wadfile->name);
+  Sys_Log("[WAD] открываю WAD: %s", wadfile->name);
   startlump = numlumps;
 
   if (  strlen(wadfile->name)<=4 || 
@@ -181,11 +182,14 @@ static void W_AddFile(wadfile_info_t *wadfile)
         I_Error("W_AddFile: Wad file %s doesn't have IWAD or PWAD id", wadfile->name);
       header.numlumps = LONG(header.numlumps);
       header.infotableofs = LONG(header.infotableofs);
+      Sys_Log("[WAD] читаю заголовок: id=%.4s, numlumps=%d, infotableofs=%d", header.identification, header.numlumps, header.infotableofs);
       length = header.numlumps*sizeof(filelump_t);
+      Sys_Log("[WAD] читаю директорию: %d lumps, размер таблицы %d байт", header.numlumps, length);
       fileinfo2free = fileinfo = malloc(length);    // killough
        lseek(wadfile->handle, header.infotableofs, SEEK_SET);
       I_Read(wadfile->handle, fileinfo, length);
       numlumps += header.numlumps;
+      Sys_Log("[WAD] директория успешно прочитана: общее число lumps=%d", numlumps);
     }
 
     // Fill in lumpinfo
