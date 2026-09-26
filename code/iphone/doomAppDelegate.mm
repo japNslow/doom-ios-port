@@ -21,6 +21,8 @@
 #import "doomAppDelegate.h"
 #import "EAGLView.h"
 #import <AudioToolbox/AudioServices.h>
+#include <exception>
+#include <typeinfo>
 #include "../doomiphone.h"
 #import <QuartzCore/CADisplayLink.h>
 #import "SettingsMenuView.h"
@@ -83,120 +85,145 @@ bool        firstRun = true;
 pthread_t gameThreadHandle;
 volatile boolean startupCompleted;
 void *GameThread( void *args ) {
-	if ( ![EAGLContext setCurrentContext:context]) {
-		printf( "Couldn't setCurrentContext for game thread\n" );
-		exit( 1 );
-	}
-	
-    while( inBackgroundProcess ) {
-         usleep( 1000 );   
-    }
-    
-	printf( "original game thread priority: %f\n", (float)[NSThread threadPriority] );
-	[NSThread setThreadPriority: 0.5];
-	printf( "new game thread priority: %f\n", (float)[NSThread threadPriority] );
-	    
-	iphoneStartup();
+    try {
+        @try {
+            if ( ![EAGLContext setCurrentContext:context]) {
+                printf( "Couldn't setCurrentContext for game thread\n" );
+                exit( 1 );
+            }
+            
+            while( inBackgroundProcess ) {
+                 usleep( 1000 );   
+            }
+            
+            printf( "original game thread priority: %f\n", (float)[NSThread threadPriority] );
+            [NSThread setThreadPriority: 0.5];
+            printf( "new game thread priority: %f\n", (float)[NSThread threadPriority] );
+                
+            iphoneStartup();
 
-	// make sure one frame has been run before setting
-	// startupCompleted, so we don't get one grey frame
-	iphoneFrame();
-	
-	startupCompleted = TRUE;	// OK to start touch / accel callbacks
-	while( 1 ) {
-        
-        // we are in the background.. dont do anything.
-        if( inBackgroundProcess ) {
-            usleep( 1000 );
+            // make sure one frame has been run before setting
+            // startupCompleted, so we don't get one grey frame
+            iphoneFrame();
+            
+            startupCompleted = TRUE;	// OK to start touch / accel callbacks
+            while( 1 ) {
+                
+                // we are in the background.. dont do anything.
+                if( inBackgroundProcess ) {
+                    usleep( 1000 );
+                }
+                iphoneFrame();
+            }
+        } @catch (NSException *e) {
+            NSLog(@"[GameThread NSException]: %@ - %@", e.name, e.reason);
         }
-		iphoneFrame();
-	}
+    } catch (const std::exception &e) {
+        NSLog(@"[GameThread C++ Exception]: %s (what: %s)", typeid(e).name(), e.what());
+    } catch (...) {
+        NSLog(@"[GameThread Unknown C++ Exception caught!]");
+    }
+    return NULL;
 }
 
 - (void)asyncTic {
-	iphoneAsyncTic();
-	[ self restartAccelerometerIfNeeded];
+    try {
+        @try {
+            iphoneAsyncTic();
+            [ self restartAccelerometerIfNeeded];
+        } @catch (NSException *e) {
+            NSLog(@"[asyncTic NSException]: %@ - %@", e.name, e.reason);
+        }
+    } catch (const std::exception &e) {
+        NSLog(@"[asyncTic C++ Exception]: %s (what: %s)", typeid(e).name(), e.what());
+    } catch (...) {
+        NSLog(@"[asyncTic Unknown C++ Exception caught!]");
+    }
 }
 
 - (void)runFrame {
-    iphoneAsyncTic(); 
-	iphoneFrame();
+    try {
+        @try {
+            iphoneAsyncTic(); 
+            iphoneFrame();
+        } @catch (NSException *e) {
+            NSLog(@"[runFrame NSException]: %@ - %@", e.name, e.reason);
+        }
+    } catch (const std::exception &e) {
+        NSLog(@"[runFrame C++ Exception]: %s (what: %s)", typeid(e).name(), e.what());
+    } catch (...) {
+        NSLog(@"[runFrame Unknown C++ Exception caught!]");
+    }
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    inBackgroundProcess = false;
-	application.statusBarHidden = YES;
-	application.statusBarOrientation = UIInterfaceOrientationLandscapeLeft;
-	gAppDelegate = self;
-    
-	// get the documents directory, where we will write configs and save games
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	[documentsDirectory getCString: iphoneDocDirectory 
-							maxLength: sizeof( iphoneDocDirectory ) - 1
-							encoding: NSASCIIStringEncoding ];
-	
-	// get the app directory, where our data files live
-	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-	if (bundlePath && [bundlePath length] > 0) {
-		[bundlePath getCString: iphoneAppDirectory 
-					 maxLength: sizeof( iphoneAppDirectory ) - 1
-					  encoding: NSUTF8StringEncoding ];
-	}
-	
-	// disable screen dimming
-	[UIApplication sharedApplication].idleTimerDisabled = YES;
-	
-    // Add the Main Menu as the SubView
-    [self MainMenu];
-    
-	// start the flow of accelerometer events
-	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-	accelerometer.delegate = self;
-	accelerometer.updateInterval = 1.0f / 30.0f;
+    try {
+        @try {
+            inBackgroundProcess = false;
+            application.statusBarHidden = YES;
+            application.statusBarOrientation = UIInterfaceOrientationLandscapeLeft;
+            gAppDelegate = self;
+            
+            // get the documents directory, where we will write configs and save games
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            [documentsDirectory getCString: iphoneDocDirectory 
+                                    maxLength: sizeof( iphoneDocDirectory ) - 1
+                                    encoding: NSASCIIStringEncoding ];
+            
+            // get the app directory, where our data files live
+            NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+            if (bundlePath && [bundlePath length] > 0) {
+                [bundlePath getCString: iphoneAppDirectory 
+                             maxLength: sizeof( iphoneAppDirectory ) - 1
+                              encoding: NSUTF8StringEncoding ];
+            }
+            
+            // disable screen dimming
+            [UIApplication sharedApplication].idleTimerDisabled = YES;
+            
+            // Add the Main Menu as the SubView
+            [self MainMenu];
+            
+            // start the flow of accelerometer events
+            UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+            accelerometer.delegate = self;
+            accelerometer.updateInterval = 1.0f / 30.0f;
 
-	// use this mutex for coordinating touch handling between
-	// the run loop thread and the game thread
-	if ( pthread_mutex_init( &eventMutex, NULL ) == -1 ) {
-		perror( "pthread_mutex_init" );
-	}
-	
-	// use this semaphore for signaling from the async cmd generation thread that
-	// the game / draw thread can wake up
-
-	// sem_init is unimplemented on iPhone
-	//if ( sem_init( &ticSemaphore, 0, 0 ) == -1 ) {
-	//	perror( "sem_init" );
-	//}
-	ticSemaphore = sem_open( "ticSemaphore", O_CREAT, S_IRWXU, 0 );
-	if ( ticSemaphore == SEM_FAILED ) {
-		perror( "sem_open" );
-	}
-	
-	// we want the main (event/async) thread to be as high a priority as possible
-	// so the game/render thread will be interrupted immediately.
-	// It looks like the default scheduling on iPhone is already what we want --
-	// the main thread is at 1.0, and new threads are at 0.5.
-	printf( "original event thread priority: %f\n", (float)[NSThread threadPriority] );
-	[NSThread setThreadPriority: 1.0];
-	printf( "new event thread priority: %f\n", (float)[NSThread threadPriority] );
-	
-    // do all the game startup work
-    @try {
-        iphoneStartup();
-    } @catch (NSException *e) {
-        NSLog(@"[Doom CRITICAL Exception] in iphoneStartup: %@ - reason: %@", e.name, e.reason);
+            // use this mutex for coordinating touch handling between
+            // the run loop thread and the game thread
+            if ( pthread_mutex_init( &eventMutex, NULL ) == -1 ) {
+                perror( "pthread_mutex_init" );
+            }
+            
+            ticSemaphore = sem_open( "ticSemaphore", O_CREAT, S_IRWXU, 0 );
+            if ( ticSemaphore == SEM_FAILED ) {
+                perror( "sem_open" );
+            }
+            
+            printf( "original event thread priority: %f\n", (float)[NSThread threadPriority] );
+            [NSThread setThreadPriority: 1.0];
+            printf( "new event thread priority: %f\n", (float)[NSThread threadPriority] );
+            
+            // do all the game startup work
+            iphoneStartup();
+            
+            int animationFrameInterval = 2;
+            CADisplayLink *aDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(runFrame)];
+            [aDisplayLink setFrameInterval:animationFrameInterval];
+            [aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            self.displayLink = aDisplayLink;
+            aDisplayLink.paused = YES;
+            
+            startupCompleted = TRUE;	// OK to start touch / accel callbacks
+        } @catch (NSException *e) {
+            NSLog(@"[applicationDidFinishLaunching NSException]: %@ - reason: %@", e.name, e.reason);
+        }
+    } catch (const std::exception &e) {
+        NSLog(@"[applicationDidFinishLaunching C++ Exception]: %s (what: %s)", typeid(e).name(), e.what());
+    } catch (...) {
+        NSLog(@"[applicationDidFinishLaunching Unknown C++ Exception caught!]");
     }
-    
-    int animationFrameInterval = 2;
-    CADisplayLink *aDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(runFrame)];
-    [aDisplayLink setFrameInterval:animationFrameInterval];
-    [aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    self.displayLink = aDisplayLink;
-    aDisplayLink.paused = YES;
-    
-    
-    startupCompleted = TRUE;	// OK to start touch / accel callbacks
 }
 
 
@@ -285,16 +312,27 @@ void *GameThread( void *args ) {
 }
 
 - (void) MainMenu {
-    
-    [self PrepareForViewSwap];
-    
-    // Switch to the Game View.
-    [window addSubview: mainMenuViewController.view];
-    [window makeKeyAndVisible];
-    iphonePauseMusic();
-    
-    displayLink.paused = YES;
-    IBMenuVisible = YES;
+    try {
+        @try {
+            [self PrepareForViewSwap];
+            
+            // Switch to the Game View.
+            if (mainMenuViewController && mainMenuViewController.view) {
+                [window addSubview: mainMenuViewController.view];
+            }
+            [window makeKeyAndVisible];
+            iphonePauseMusic();
+            
+            displayLink.paused = YES;
+            IBMenuVisible = YES;
+        } @catch (NSException *e) {
+            NSLog(@"[MainMenu NSException]: %@ - %@", e.name, e.reason);
+        }
+    } catch (const std::exception &e) {
+        NSLog(@"[MainMenu C++ Exception]: %s (what: %s)", typeid(e).name(), e.what());
+    } catch (...) {
+        NSLog(@"[MainMenu Unknown C++ Exception caught!]");
+    }
 }
 
 - (void) DemoGame {

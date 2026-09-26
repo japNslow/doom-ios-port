@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		4333CCE80F5CC23E00AE2B6F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4333CCE70F5CC23E00AE2B6F /* AudioToolbox.framework */; };
-		434669A60F8D08C000EA7D6D /* doomAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 434669A50F8D08C000EA7D6D /* doomAppDelegate.m */; };
+		434669A60F8D08C000EA7D6D /* doomAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 434669A50F8D08C000EA7D6D /* doomAppDelegate.mm */; };
 		4364BF3F0F5CB25900F29317 /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4364BF3E0F5CB25900F29317 /* dist.plist */; };
 		43A945150F82D75900FFD32E /* iphone_sys.c in Sources */ = {isa = PBXBuildFile; fileRef = 43A945140F82D75900FFD32E /* iphone_sys.c */; };
 		43CF02FF0F56974E00E4A23D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CF02FE0F56974E00E4A23D /* Default.png */; };
@@ -135,11 +135,11 @@
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* Doom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Doom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		4333CCE70F5CC23E00AE2B6F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		434669A30F8D08C000EA7D6D /* doom_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doom_Prefix.pch; sourceTree = "<group>"; };
 		434669A40F8D08C000EA7D6D /* doomAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doomAppDelegate.h; sourceTree = "<group>"; };
-		434669A50F8D08C000EA7D6D /* doomAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = doomAppDelegate.m; sourceTree = "<group>"; };
+		434669A50F8D08C000EA7D6D /* doomAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = doomAppDelegate.mm; sourceTree = "<group>"; };
 		4364BF3E0F5CB25900F29317 /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		43A945140F82D75900FFD32E /* iphone_sys.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iphone_sys.c; sourceTree = "<group>"; };
 		43CF02FE0F56974E00E4A23D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -424,8 +424,8 @@
 				72E8495F0F942B9300AB3C99 /* misc.h */,
 				434669A30F8D08C000EA7D6D /* doom_Prefix.pch */,
 				434669A40F8D08C000EA7D6D /* doomAppDelegate.h */,
-				434669A50F8D08C000EA7D6D /* doomAppDelegate.m */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				434669A50F8D08C000EA7D6D /* doomAppDelegate.mm */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
 				724C531E0FBDBCEE000E4348 /* BackgroundMusic.cpp */,
 				7229CE540F6C8CDE004123C5 /* gles_glue.c */,
 				727886A20FBDBA740020D469 /* gles_glue.h */,
@@ -772,7 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				43E8D2E10F4FC61E003F09B2 /* iphone_main.c in Sources */,
 				C86F975E13D6377B0069B7B6 /* IBGlue.m in Sources */,
 				43CF030A0F56D5C200E4A23D /* iphone_loop.c in Sources */,
@@ -781,7 +781,7 @@
 				7229CE550F6C8CDE004123C5 /* gles_glue.c in Sources */,
 				72B5FF390F7E5C3D00C8A372 /* hud.c in Sources */,
 				43A945150F82D75900FFD32E /* iphone_sys.c in Sources */,
-				434669A60F8D08C000EA7D6D /* doomAppDelegate.m in Sources */,
+				434669A60F8D08C000EA7D6D /* doomAppDelegate.mm in Sources */,
 				72D50DBC0F8ED98000BB49E6 /* ipak.c in Sources */,
 				72E847650F93C61900AB3C99 /* am_map.c in Sources */,
 				72E847740F93FFDB00AB3C99 /* d_client.c in Sources */,

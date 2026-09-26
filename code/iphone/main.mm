@@ -21,12 +21,40 @@
 #import <UIKit/UIKit.h>
 #include <unistd.h>
 #include <string.h>
+#include <exception>
+#include <typeinfo>
 
 extern char iphoneAppDirectory[1024];
 extern int myargc;
 extern char **myargv;
 
+static void DoomTerminateHandler() {
+    NSLog(@"[CRASH HANDLER] std::terminate called!");
+    try {
+        std::exception_ptr p = std::current_exception();
+        if (p) {
+            std::rethrow_exception(p);
+        } else {
+            NSLog(@"[CRASH HANDLER] No active C++ exception found in current_exception");
+        }
+    } catch (const std::exception &e) {
+        NSLog(@"[CRASH HANDLER] Caught C++ std::exception: type=%s, what=%s", typeid(e).name(), e.what());
+    } catch (id obj) {
+        NSLog(@"[CRASH HANDLER] Caught Objective-C exception object: %@", obj);
+    } catch (...) {
+        NSLog(@"[CRASH HANDLER] Caught unknown C++ exception!");
+    }
+    abort();
+}
+
 int main(int argc, char *argv[]) {
+    std::set_terminate(DoomTerminateHandler);
+
+    NSSetUncaughtExceptionHandler([](NSException *exception) {
+        NSLog(@"[CRASH HANDLER] Uncaught NSException: %@, reason: %@, callStack: %@",
+              exception.name, exception.reason, exception.callStackSymbols);
+    });
+
 	// save for doom
 	myargc = argc;
 	myargv = argv;
