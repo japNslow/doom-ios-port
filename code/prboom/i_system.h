@@ -34,6 +34,8 @@
 #ifndef __I_SYSTEM__
 #define __I_SYSTEM__
 
+#include "m_fixed.h"
+
 #ifdef __GNUG__
 #pragma interface
 #endif
@@ -75,9 +77,14 @@ int I_Filelength(int handle);
 void I_SetAffinityMask(void);
 
 #ifdef IPHONE
+struct wbstartstruct_s;
 void SysIPhoneVibrate(void);
 void iphoneSetNotifyText(const char *str, ...);
 void IR_InitLevel(void);
+void iphoneIntermission(struct wbstartstruct_s *wbstartstruct);
+void iphoneStartLevel(void);
+void iphoneSet2D(void);
+int iphoneRotateForLandscape(void);
 #endif
 
 #endif
