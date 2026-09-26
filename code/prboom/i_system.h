@@ -34,6 +34,10 @@
 #ifndef __I_SYSTEM__
 #define __I_SYSTEM__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "m_fixed.h"
 
 #ifdef __GNUG__
@@ -86,6 +90,10 @@ void iphoneStartLevel(void);
 void iphoneSet2D(void);
 int iphoneRotateForLandscape(void);
 void Sys_Log(const char *fmt, ...);
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

@@ -18,6 +18,9 @@
  
  */
 
+#ifndef __IPHONE_DOOM_H__
+#define __IPHONE_DOOM_H__
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -568,4 +571,6 @@ void Sys_Log(const char *fmt, ...);
 #ifdef __cplusplus
 }
 #endif
+
+#endif // __IPHONE_DOOM_H__
 
