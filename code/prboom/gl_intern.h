@@ -223,6 +223,6 @@ int gld_GetTexDimension(int value);
 void gld_SetTexturePalette(GLenum target);
 void gld_Precache(void);
 
-PFNGLCOLORTABLEEXTPROC gld_ColorTableEXT;
+extern PFNGLCOLORTABLEEXTPROC gld_ColorTableEXT;
 
 #endif // _GL_INTERN_H

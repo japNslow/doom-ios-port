@@ -66,6 +66,7 @@
 #include "gl_struct.h"
 
 extern int tran_filter_pct;
+PFNGLCOLORTABLEEXTPROC gld_ColorTableEXT = NULL;
 
 // JDC #define USE_VERTEX_ARRAYS
 
