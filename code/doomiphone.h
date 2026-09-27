@@ -46,6 +46,10 @@
 #include <sys/ioctl.h>
 #include <ifaddrs.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
 #include "iphone/gles_glue.h"
@@ -119,6 +123,8 @@
 #include "iphone/ipak.h"
 #include "iphone/iphone_doom.h"
 #include "iphone/iphone_email.h" //gsh, adds support for emailing the console to id
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif 

@@ -16,6 +16,10 @@
 
 #define GLAPIENTRY
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // this needs to be added before each projection matrix
 int iphoneRotateForLandscape();
 
@@ -205,6 +209,10 @@ GLAPI void GLAPIENTRY gluTessVertex (GLUtesselator* tess, GLdouble *location, GL
 
 GLUtesselator * GLAPIENTRY gluNewTess( void );
 void GLAPIENTRY gluDeleteTess( GLUtesselator *tess );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 
